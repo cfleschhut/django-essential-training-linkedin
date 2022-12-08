@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SmartNotes</title>
-  </head>
+{% extends 'base.html' %}
 
-  <body>
-    <h1>Welcome to SmartNotes!</h1>
-    <p>Today is {{today}}</p>
-  </body>
-</html>
+{% block content %}
+<h1>Welcome to SmartNotes!</h1>
+<p>Today is {{today}}</p>
+{% endblock %}
