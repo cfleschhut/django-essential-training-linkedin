@@ -3,4 +3,7 @@
 {% block content %}
 <h1>Welcome to SmartNotes!</h1>
 <p>Today is {{today}}</p>
+<p>
+  <a href="{% url 'notes:list' %}">Notes</a>
+</p>
 {% endblock %}
