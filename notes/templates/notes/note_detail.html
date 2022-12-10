@@ -7,5 +7,6 @@
 <p>
   <a href="{% url 'notes:list' %}">Back</a>
   <a href="{% url 'notes:update' note.id %}">Edit</a>
+  <a href="{% url 'notes:delete' note.id %}">Delete</a>
 </p>
 {% endblock %}
