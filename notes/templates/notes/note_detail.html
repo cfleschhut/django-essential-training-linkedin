@@ -3,4 +3,9 @@
 {% block content %}
 <h1>{{note.title}}</h1>
 <p>{{note.text}}</p>
+
+<p>
+  <a href="{% url 'notes:list' %}">Back</a>
+  <a href="{% url 'notes:update' note.id %}">Edit</a>
+</p>
 {% endblock %}

@@ -7,9 +7,13 @@
 </p>
 {% endif %}
 
-<form action="{% url 'notes:new' %}" method="post">
+<form method="post">
   {% csrf_token %}
-  {{ form }}
+  {{ form.as_p }}
   <button type="submit">Submit</button>
 </form>
+
+<p>
+  <a href="{% url 'notes:list' %}">Cancel</a>
+</p>
 {% endblock %}

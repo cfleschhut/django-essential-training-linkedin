@@ -7,7 +7,7 @@
   {% for note in note_list %}
   <div>
     <h2>
-      <a href="{% url 'notes:detail' pk=note.id %}">
+      <a href="{% url 'notes:detail' note.id %}">
         {{note.title}}
       </a>
     </h2>
