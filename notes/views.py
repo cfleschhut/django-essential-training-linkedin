@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Note
 from .forms import NoteForm
 
 
-class NoteListView(ListView):
+class NoteListView(LoginRequiredMixin, ListView):
     model = Note
+    login_url = "/admin/"
+
+    def get_queryset(self):
+        return self.request.user.note_set.all()
 
 
 class NoteDetailView(DetailView):
