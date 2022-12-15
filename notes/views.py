@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import Http404
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -9,28 +8,29 @@ from .forms import NoteForm
 
 class NoteListView(LoginRequiredMixin, ListView):
     model = Note
-    login_url = "/admin/"
 
     def get_queryset(self):
         return self.request.user.note_set.all()
 
 
-class NoteDetailView(DetailView):
+class NoteDetailView(LoginRequiredMixin, DetailView):
     model = Note
 
 
-class NoteCreateView(CreateView):
-    model = Note
-    form_class = NoteForm
-    success_url = "/notes/"
-
-
-class NoteUpdateView(UpdateView):
+class NoteCreateView(LoginRequiredMixin, CreateView):
     model = Note
     form_class = NoteForm
-    success_url = "/notes/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
-class NoteDeleteView(DeleteView):
+class NoteUpdateView(LoginRequiredMixin, UpdateView):
     model = Note
-    success_url = "/notes/"
+    form_class = NoteForm
+
+
+class NoteDeleteView(LoginRequiredMixin, DeleteView):
+    model = Note
+    success_url = reverse_lazy('notes:list')

@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput, Textarea
-from django.core.exceptions import ValidationError
+# from django.core.exceptions import ValidationError
 
 from .models import Note
 
@@ -18,8 +18,6 @@ class NoteForm(ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data["title"]
-
-        if "Django" not in title:
-            raise ValidationError("Only accepting notes about Django")
-
+        # if "Django" not in title:
+        #     raise ValidationError("Only accepting notes about Django")
         return title
