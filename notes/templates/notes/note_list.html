@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+  <p>
+    Hello {{ user.username }}!
+  </p>
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Log out</button>
+  </form>
+{% endif %}
+
 <h1>Notes</h1>
 
 <div class="notes">
@@ -17,4 +28,5 @@
   </div>
   {% endfor %}
 </div>
+
 {% endblock %}
