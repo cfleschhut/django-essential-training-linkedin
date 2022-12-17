@@ -10,6 +10,26 @@
   </head>
 
   <body>
+    <header>
+      {% if user.is_authenticated %}
+      <p>
+        Hello {{ user.username }}!
+        <a href="{% url 'notes:list' %}">Home</a>
+        <a href="{% url 'notes:new' %}">Add note</a>
+      </p>
+      
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+      {% else %}
+      <p>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Signup</a>
+      </p>
+      {% endif %}
+    </header>
+
     {% block content %}
     {% endblock %}
   </body>
